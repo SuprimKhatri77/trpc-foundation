@@ -5,20 +5,27 @@ import { auth, toNodeHandler } from '@foundation-trpc/auth'
 
 const app = express()
 
-const allowedOrigns = [
+const allowedOrigins = [
   'http://localhost:3000',
   'https://expresss-nextjs-trpc-monorepo-front.vercel.app',
   process.env.FRONTEND_URL,
 ].filter(Boolean) as string[]
 
-app.use(
-  cors({
-    origin: allowedOrigns,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-    credentials: true,
-  }),
-)
+const corsOptions = {
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization',
+    'X-Requested-With',
+    'Cookie',
+  ],
+  exposedHeaders: ['Set-Cookie'],
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+}
+app.use(cors(corsOptions))
 
 app.options('/*any', cors())
 

@@ -17,7 +17,8 @@ export async function SigninController(
       console.log('setting cookie: ')
       console.log('cookie received from service: ', result.cookies)
       ctx.res.setHeader('Set-Cookie', result.cookies)
-      console.log('cookei set.')
+      ctx.res.setHeader('Access-Control-Allow-Credentials', 'true')
+      console.log('cookie set.')
     }
     return result
   } catch (error) {

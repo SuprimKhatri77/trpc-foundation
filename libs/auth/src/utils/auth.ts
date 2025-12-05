@@ -8,6 +8,11 @@ export const auth = betterAuth({
     provider: 'pg',
     schema,
   }),
+  baseURL:
+    process.env.NODE_ENV === 'production'
+      ? process.env.NEXT_PUBLIC_API_URL ||
+        "'https://express-nextjs-trpc-api.onrender.com'"
+      : 'http://localhost:5000',
   emailAndPassword: {
     enabled: true,
     autoSignIn: true,
