@@ -26,7 +26,7 @@ export const auth = betterAuth({
     },
   },
   trustedOrigins: [
-    'https://expresss-nextjs-trpc-monorepo.vercel.app',
+    'https://expresss-nextjs-trpc-monorepo-front.vercel.app',
     'https://express-nextjs-trpc-monorepo-api.up.railway.app',
   ],
 }) as Auth
