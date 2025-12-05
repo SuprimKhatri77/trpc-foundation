@@ -9,27 +9,21 @@ export const router = t.router as typeof t.router
 export const publicProcedure = t.procedure as typeof t.procedure
 export const protectedProcedure = t.procedure.use(async ({ ctx, next }) => {
   const headers = fromNodeHeaders(ctx.req.headers)
-  let userId: string | undefined
-  try {
-    const session = await ctx.auth.api.getSession({
-      headers,
-    })
+  const session = await ctx.auth.api.getSession({
+    headers,
+  })
 
-    if (!session) {
-      throw new TRPCError({
-        code: 'UNAUTHORIZED',
-        message: 'You must be logged in.',
-      })
-    }
-    userId = session.user.id
-  } catch (error) {
-    console.log('error: ', error)
+  if (!session) {
+    throw new TRPCError({
+      code: 'UNAUTHORIZED',
+      message: 'You must be logged in.',
+    })
   }
 
   return next({
     ctx: {
       ...ctx,
-      userId,
+      userId: session.user.id,
     } as ProtectedContext,
   })
 }) as typeof t.procedure

@@ -12,6 +12,9 @@ export const trpc: ReturnType<typeof CreateTRPCProxyClient<AppRouter>> =
           const headersList = await headers()
           return Object.fromEntries(headersList.entries())
         },
+        fetch(url, options) {
+          return fetch(url, { ...options, credentials: 'include' })
+        },
       }),
     ],
   })
