@@ -1,0 +1,27 @@
+{
+  "name": "@foundation-trpc/trpc-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "scripts": {
+    "build": "rm -rf ./dist && tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.21.0",
+  "dependencies": {
+    "@foundation-trpc/auth": "workspace:*",
+    "@foundation-trpc/core": "workspace:*",
+    "@foundation-trpc/db": "workspace:*",
+    "@foundation-trpc/types": "workspace:*",
+    "@trpc/server": "^11.7.2",
+    "express": "^5.2.1",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6"
+  }
+}

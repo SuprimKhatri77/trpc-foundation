@@ -1,0 +1,19 @@
+{
+  "name": "@foundation-trpc/auth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "scripts": {
+    "build": "rm -rf ./dist && tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.21.0",
+  "dependencies": {
+    "@foundation-trpc/db": "workspace:*",
+    "better-auth": "^1.4.5"
+  }
+}

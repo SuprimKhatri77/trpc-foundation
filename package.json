@@ -1,0 +1,30 @@
+{
+  "name": "foundation-trpc",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "format": "prettier \"{apps,libs}/**/*.{ts,tsx,js,json}\" --ignore-path .gitignore",
+    "format:check": "pnpm format --check",
+    "format:write": "pnpm format --write",
+    "build:libs": "nx run-many --target=build --projects=@foundation-trpc/types,@foundation-trpc/db,@foundation-trpc/auth,@foundation-trpc/core,@foundation-trpc/trpc-server,@foundation-trpc/trpc-client",
+    "build:apps": "nx run-many --target=build --projects=@foundation-trpc/api,@foundation-trpc/web",
+    "build": "pnpm build:libs && pnpm build:apps",
+    "tsc": "pnpm exec nx run-many --target=tsc",
+    "lint": "pnpm exec nx run-many --target=lint",
+    "validate": "pnpm format:write && pnpm tsc && pnpm lint && pnpm build",
+    "prepare": "husky install",
+    "dev": "nx run-many --target=dev --projects=@foundation-trpc/types,@foundation-trpc/core,@foundation-trpc/trpc-server,@foundation-trpc/api --parallel"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.21.0",
+  "devDependencies": {
+    "husky": "^8.0.0",
+    "lint-staged": "^16.2.7",
+    "nx": "22.1.3",
+    "prettier": "^3.7.3",
+    "typescript": "^5.9.3"
+  }
+}

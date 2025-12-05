@@ -1,0 +1,27 @@
+{
+  "name": "@foundation-trpc/types",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "scripts": {
+    "build": "rm -rf ./dist && tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.21.0",
+  "dependencies": {
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@foundation-trpc/auth": "workspace:*",
+    "@foundation-trpc/db": "workspace:*",
+    "@types/express": "^5.0.6"
+  },
+  "peerDependencies": {
+    "@foundation-trpc/auth": "workspace:*",
+    "@foundation-trpc/db": "workspace:*"
+  }
+}
