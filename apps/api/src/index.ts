@@ -15,7 +15,7 @@ app.use(
 
 app.all('/api/auth/*any', toNodeHandler(auth))
 
-app.use('/trpc', express.json())
+app.use(express.json())
 
 app.use('/trpc', trpcExpress)
 

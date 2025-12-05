@@ -1,23 +1,35 @@
 import { initTRPC, TRPCError } from '@trpc/server'
 import { Context } from '../context'
 import { ProtectedContext } from '@foundation-trpc/types'
+import { fromNodeHeaders } from '@foundation-trpc/auth'
 
 export const t = initTRPC.context<Context>().create()
 
 export const router = t.router as typeof t.router
 export const publicProcedure = t.procedure as typeof t.procedure
 export const protectedProcedure = t.procedure.use(async ({ ctx, next }) => {
-  if (!ctx.userId) {
-    throw new TRPCError({
-      code: 'UNAUTHORIZED',
-      message: 'You must be logged in.',
+  const headers = fromNodeHeaders(ctx.req.headers)
+  let userId: string | undefined
+  try {
+    const session = await ctx.auth.api.getSession({
+      headers,
     })
+
+    if (!session) {
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'You must be logged in.',
+      })
+    }
+    userId = session.user.id
+  } catch (error) {
+    console.log('error: ', error)
   }
 
   return next({
     ctx: {
       ...ctx,
-      userId: ctx.userId,
+      userId,
     } as ProtectedContext,
   })
 }) as typeof t.procedure
