@@ -15,9 +15,10 @@ export async function SigninController(
     console.log('received response from service')
     if (result.success && result.cookies) {
       console.log('setting cookie: ')
+      console.log('cookie received from service: ', result.cookies)
       ctx.res.setHeader('Set-Cookie', result.cookies)
+      console.log('cookei set.')
     }
-    console.log('cookei set.')
     return result
   } catch (error) {
     console.log('error: ', error)
