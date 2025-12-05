@@ -8,13 +8,17 @@
     "format:check": "pnpm format --check",
     "format:write": "pnpm format --write",
     "build:libs": "nx run-many --target=build --projects=@foundation-trpc/types,@foundation-trpc/db,@foundation-trpc/auth,@foundation-trpc/core,@foundation-trpc/trpc-server,@foundation-trpc/trpc-client",
+    "build:api": "pnpm build:libs && pnpm --filter @foundation-trpc/api build",
+    "build:web": "pnpm build:libs && pnpm --filter @foundation-trpc/web build",
     "build:apps": "nx run-many --target=build --projects=@foundation-trpc/api,@foundation-trpc/web",
     "build": "pnpm build:libs && pnpm build:apps",
     "tsc": "pnpm exec nx run-many --target=tsc",
     "lint": "pnpm exec nx run-many --target=lint",
     "validate": "pnpm format:write && pnpm tsc && pnpm lint && pnpm build",
     "prepare": "husky install",
-    "dev": "nx run-many --target=dev --projects=@foundation-trpc/types,@foundation-trpc/core,@foundation-trpc/trpc-server,@foundation-trpc/api --parallel"
+    "dev": "nx run-many --target=dev --projects=@foundation-trpc/types,@foundation-trpc/core,@foundation-trpc/trpc-server,@foundation-trpc/api --parallel",
+    "start:api": "pnpm --filter @foundation-trpc/api start",
+    "start:web": "pnpm --filter @foundation-trpc/web start"
   },
   "keywords": [],
   "author": "",
