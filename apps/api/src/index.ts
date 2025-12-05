@@ -6,7 +6,7 @@ import { auth, toNodeHandler } from '@foundation-trpc/auth'
 const app = express()
 app.use(
   cors({
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:3000', process.env.FRONTEND_URL!],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
