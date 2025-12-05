@@ -25,7 +25,6 @@ export const auth = betterAuth({
       httpOnly: true,
       path: '/',
       secure: process.env.NODE_ENV === 'production',
-      partitioned: process.env.NODE_ENV === 'production',
     },
     crossSubDomainCookies: {
       enabled: process.env.NODE_ENV !== 'production',
