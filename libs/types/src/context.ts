@@ -7,7 +7,6 @@ export interface AppContext {
   res: Response
   db: DATABASE
   auth: AUTH
-  userId: string | undefined
 }
 
 export type ProtectedContext = AppContext & {
