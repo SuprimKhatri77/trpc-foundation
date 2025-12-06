@@ -16,8 +16,16 @@ export async function SigninController(
     if (result.success && result.cookies) {
       console.log('setting cookie: ')
       console.log('cookie received from service: ', result.cookies)
-      ctx.res.setHeader('Set-Cookie', result.cookies)
+
+      const modifiedCookie = result.cookies.includes('Domain=')
+        ? result.cookies
+        : result.cookies + '; Domain=.onrender.com'
+
+      console.log('modified cookie with domain: ', modifiedCookie)
+
+      ctx.res.setHeader('Set-Cookie', modifiedCookie)
       ctx.res.setHeader('Access-Control-Allow-Credentials', 'true')
+
       console.log('cookie set.')
     }
     return result
