@@ -19,6 +19,8 @@ const corsOptions = {
     'Authorization',
     'X-Requested-With',
     'Cookie',
+    'x-captcha-response',
+    'x-captcha-user-remote-ip',
   ],
   exposedHeaders: ['Set-Cookie'],
   credentials: true,

@@ -24,12 +24,11 @@ export const auth = betterAuth({
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       httpOnly: true,
       path: '/',
-      secure: process.env.NODE_ENV === 'production',
       partitioned: process.env.NODE_ENV === 'production',
     },
     crossSubDomainCookies: {
-      enabled: process.env.NODE_ENV !== 'production',
-      domain: process.env.NODE_ENV !== 'production' ? 'localhost' : undefined,
+      enabled: process.env.NODE_ENV === 'production' ? false : true,
+      domain: process.env.NODE_ENV === 'production' ? undefined : 'localhost',
     },
   },
   trustedOrigins: [
