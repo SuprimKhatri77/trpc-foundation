@@ -24,7 +24,7 @@ export const auth = betterAuth({
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       httpOnly: true,
       path: '/',
-      partitioned: process.env.NODE_ENV === 'production',
+      // partitioned: process.env.NODE_ENV === 'production',
     },
     crossSubDomainCookies: {
       enabled: false,
