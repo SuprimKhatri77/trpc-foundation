@@ -27,9 +27,8 @@ export const auth = betterAuth({
       // partitioned: process.env.NODE_ENV === 'production',
     },
     crossSubDomainCookies: {
-      enabled: false,
-      domain:
-        process.env.NODE_ENV === 'production' ? '.onrender.com' : 'localhost',
+      enabled: true,
+      domain: '.onrender.com',
     },
   },
   trustedOrigins: [
