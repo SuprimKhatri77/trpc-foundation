@@ -32,7 +32,7 @@ export const auth = betterAuth({
     },
   },
   trustedOrigins: [
-    'https://expresss-nextjs-trpc-monorepo-front.vercel.app',
+    'https://trpc-foundation-monorepo.onrender.com',
     'https://express-nextjs-trpc-api.onrender.com',
     'http://localhost:5000',
     'http://localhost:3000',

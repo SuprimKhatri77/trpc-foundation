@@ -7,7 +7,7 @@ const app = express()
 
 const allowedOrigins = [
   'http://localhost:3000',
-  'https://expresss-nextjs-trpc-monorepo-front.vercel.app',
+  'https://trpc-foundation-monorepo.onrender.com',
   process.env.FRONTEND_URL,
 ].filter(Boolean) as string[]
 
