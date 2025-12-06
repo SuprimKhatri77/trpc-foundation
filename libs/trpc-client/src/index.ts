@@ -10,6 +10,10 @@ export const trpc: ReturnType<typeof CreateTRPCProxyClient<AppRouter>> =
         url: `${process.env.NEXT_PUBLIC_API_URL}/trpc`,
         async headers() {
           const headersList = await headers()
+          console.log(
+            'headers in the server side instance of trpc: ',
+            headersList,
+          )
           return Object.fromEntries(headersList.entries())
         },
         fetch(url, options) {
