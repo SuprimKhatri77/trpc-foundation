@@ -23,15 +23,14 @@ export const authRoutes = router({
       return SigninController(input, ctx)
     }),
   getUserSession: protectedProcedure.query(async ({ input, ctx }) => {
-    console.log('getUserSession getting invoked')
-    const headers = fromNodeHeaders(ctx.req.headers)
-    console.log('headers from ctx: ', headers)
-
-    const session = await ctx.auth.api.getSession({
-      headers,
-    })
-    console.log('session in authrouter: ', session)
-    return session
+    if (!ctx.session || !ctx.session.user) {
+      return {
+        success: false,
+        message: 'User not found.',
+        session: ctx.session,
+      }
+    }
+    return { success: true, session: ctx.session }
   }),
   signout: protectedProcedure
     .output(signoutResponseSchema)

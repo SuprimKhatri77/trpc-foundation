@@ -19,12 +19,13 @@ export const auth = betterAuth({
   },
   advanced: {
     cookiePrefix: 'better-auth',
-    useSecureCookies: true,
+    useSecureCookies: process.env.NODE_ENV === 'production',
     defaultCookieAttributes: {
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       httpOnly: true,
       path: '/',
       secure: process.env.NODE_ENV === 'production',
+      partitioned: process.env.NODE_ENV === 'production',
     },
     crossSubDomainCookies: {
       enabled: process.env.NODE_ENV !== 'production',
@@ -34,6 +35,8 @@ export const auth = betterAuth({
   trustedOrigins: [
     'https://expresss-nextjs-trpc-monorepo-front.vercel.app',
     'https://express-nextjs-trpc-api.onrender.com',
+    'http://localhost:5000',
+    'http://localhost:3000',
   ],
 }) as Auth
 

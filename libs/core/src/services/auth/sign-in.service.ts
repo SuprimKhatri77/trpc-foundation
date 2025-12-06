@@ -32,9 +32,15 @@ export async function signin(
       },
       returnHeaders: true,
     })
-    console.log('signin done now setting cookie.')
-    const getCookie = headers.get('set-cookie') || ''
-    console.log('cookie after signin: ', getCookie)
+    // console.log(
+    //   'cookie after signin: ',
+    //   headers.get('set-cookie') || 'no cookie',
+    //   headers.getSetCookie(),
+    // )
+    // console.log('signin done now setting cookie.')
+    const getCookie =
+      headers.get('set-cookie') || headers.getSetCookie()[0] || ''
+    console.log('cookie after signin: ', getCookie || 'no get cookie')
     return {
       success: true,
       message: 'Logged in successfully.',

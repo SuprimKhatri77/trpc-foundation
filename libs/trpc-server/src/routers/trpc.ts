@@ -9,21 +9,24 @@ export const router = t.router as typeof t.router
 export const publicProcedure = t.procedure as typeof t.procedure
 export const protectedProcedure = t.procedure.use(async ({ ctx, next }) => {
   const headers = fromNodeHeaders(ctx.req.headers)
-  const session = await ctx.auth.api.getSession({
+  const result = await ctx.auth.api.getSession({
     headers,
   })
 
-  if (!session) {
+  if (!result || !result.session) {
     throw new TRPCError({
       code: 'UNAUTHORIZED',
-      message: 'You must be logged in.',
+      message: 'User not logged in.',
     })
   }
 
   return next({
     ctx: {
       ...ctx,
-      userId: session.user.id,
+      session: {
+        ...result.session,
+        user: result.user,
+      },
     } as ProtectedContext,
   })
 }) as typeof t.procedure
