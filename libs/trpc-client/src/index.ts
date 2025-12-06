@@ -8,19 +8,7 @@ export const trpc: ReturnType<typeof CreateTRPCProxyClient<AppRouter>> =
     links: [
       httpBatchLink({
         url: `${process.env.NEXT_PUBLIC_API_URL}/trpc`,
-        async headers() {
-          const cookieStore = await cookies()
-          const cookieString = cookieStore
-            .getAll()
-            .map((cookie) => `${cookie.name}=${cookie.value}`)
-            .join('; ')
 
-          console.log('cookies being sent:', cookieString)
-
-          return {
-            cookie: cookieString,
-          }
-        },
         fetch(url, options) {
           return fetch(url, {
             ...options,
