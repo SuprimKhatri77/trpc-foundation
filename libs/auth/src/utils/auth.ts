@@ -11,6 +11,7 @@ export const auth = betterAuth({
   baseURL:
     process.env.NODE_ENV === 'production'
       ? process.env.NEXT_PUBLIC_API_URL ||
+        'https://api.calculators247.com' ||
         'https://express-nextjs-trpc-api.onrender.com'
       : 'http://localhost:5000',
   emailAndPassword: {
@@ -24,14 +25,15 @@ export const auth = betterAuth({
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       httpOnly: true,
       path: '/',
-      // partitioned: process.env.NODE_ENV === 'production',
     },
     crossSubDomainCookies: {
       enabled: true,
-      domain: '.onrender.com',
+      domain: 'calculators247.com',
     },
   },
   trustedOrigins: [
+    'https://calculators247.com',
+    'https://api.calculators247.com',
     'https://trpc-foundation-monorepo.onrender.com',
     'https://express-nextjs-trpc-api.onrender.com',
     'http://localhost:5000',
