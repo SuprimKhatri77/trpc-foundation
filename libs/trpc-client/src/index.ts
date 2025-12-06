@@ -1,7 +1,7 @@
 import { createTRPCProxyClient, httpBatchLink } from '@trpc/client'
 import type { AppRouter } from '@foundation-trpc/trpc-server'
 import type { createTRPCProxyClient as CreateTRPCProxyClient } from '@trpc/client'
-import { headers } from 'next/headers'
+import { cookies } from 'next/headers'
 
 export const trpc: ReturnType<typeof CreateTRPCProxyClient<AppRouter>> =
   createTRPCProxyClient<AppRouter>({
@@ -9,15 +9,24 @@ export const trpc: ReturnType<typeof CreateTRPCProxyClient<AppRouter>> =
       httpBatchLink({
         url: `${process.env.NEXT_PUBLIC_API_URL}/trpc`,
         async headers() {
-          const headersList = await headers()
-          console.log(
-            'headers in the server side instance of trpc: ',
-            headersList,
-          )
-          return Object.fromEntries(headersList.entries())
+          const cookieStore = await cookies()
+          const cookieString = cookieStore
+            .getAll()
+            .map((cookie) => `${cookie.name}=${cookie.value}`)
+            .join('; ')
+
+          console.log('cookies being sent:', cookieString)
+
+          return {
+            cookie: cookieString,
+          }
         },
         fetch(url, options) {
-          return fetch(url, { ...options, credentials: 'include' })
+          return fetch(url, {
+            ...options,
+            credentials: 'include',
+            cache: 'no-store',
+          })
         },
       }),
     ],
