@@ -29,7 +29,7 @@ export const auth = betterAuth({
     crossSubDomainCookies: {
       enabled: true,
       domain:
-        process.env.NODE_ENV === 'production' ? 'onrender.com' : 'localhost',
+        process.env.NODE_ENV === 'production' ? '.onrender.com' : 'localhost',
     },
   },
   trustedOrigins: [
