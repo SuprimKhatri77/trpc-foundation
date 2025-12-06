@@ -11,7 +11,7 @@ export const auth = betterAuth({
   baseURL:
     process.env.NODE_ENV === 'production'
       ? process.env.NEXT_PUBLIC_API_URL ||
-        "'https://express-nextjs-trpc-api.onrender.com'"
+        'https://express-nextjs-trpc-api.onrender.com'
       : 'http://localhost:5000',
   emailAndPassword: {
     enabled: true,
@@ -27,8 +27,9 @@ export const auth = betterAuth({
       partitioned: process.env.NODE_ENV === 'production',
     },
     crossSubDomainCookies: {
-      enabled: process.env.NODE_ENV === 'production' ? false : true,
-      domain: process.env.NODE_ENV === 'production' ? undefined : 'localhost',
+      enabled: true,
+      domain:
+        process.env.NODE_ENV === 'production' ? 'onrender.com' : 'localhost',
     },
   },
   trustedOrigins: [
